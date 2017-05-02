@@ -63,3 +63,7 @@ p{
 .displaySwitches{
 	display:inline-block;
 }
+
+i{
+	padding-right: 10px;
+}
