@@ -7,7 +7,12 @@
 	<title></title>
 </head>
 <body>
-	<button class="btn" id="test" onclick="checkTwitchChannelExists()">Test</button>
+	<!-- <button class="btn" id="test" onclick="checkTwitchChannelExists()">Test</button> -->
+	<div id="displaysHolder">
+		<div id="displayAll" class="displaySwitches" onclick="displayAll()">All</div>
+		<div id="displayOnline" class="displaySwitches" onclick="displayOnline()">Online</div>
+		<div id="displayOffline" class="displaySwitches" onclick="displayOffline()">Offline</div>
+	</div>
 	<div id="channelsHolder">
 		<div id="onlineHolder">
 		</div>

@@ -5,7 +5,7 @@
 }
 
 .no-channel{
-	background: red;
+	background: #ff6666;
 }
 
 .offline{
@@ -33,4 +33,33 @@ p{
 	width:80px;
 	height:80px;
 	padding:10px 10px 10px 10px;
+}
+
+.displaySwitches{
+	display: inline-block;
+	border-bottom: 3px solid black;
+	border-radius: 5px;
+	padding:5px 5px 5px 5px;
+	text-align: center;
+	width:100px;
+}
+
+.displaySwitches:hover{
+	background: rgba(0,0,0,.2)
+}
+
+.hidden{
+	display:none;
+}
+
+.shown{
+
+}
+
+#displaysHolder{
+	text-align: center;
+}
+
+.displaySwitches{
+	display:inline-block;
 }
