@@ -5,37 +5,34 @@ var existsArr = [];
 var onlineArr = [];
 var offlineArr = [];
 //var testerArr = ["comster404"];
-var testerArr = ["c9sneaky"];
+var testerArr = ["NALCS1"];
 
-function breakUpArray(){
-	//there has to be a better way to do this.
-	testerArr.forEach(function(channel){
-		checkTwitchChannelExists(channel);
+
+function checkTwitchChannelExists(){
+
+	channelsArr.forEach(function(channel){
+		$.getJSON(apiBaseURL + 'channels/' + channel + '?callback=?', function(data) {
+			console.log(data); 
+			if(data.status === 404){
+				//make a function to make the display. maybe need to make an array of arrays with the status to then sort the list.
+				make404Div(channel, data);
+			}
+			else{
+				checkTwitchChannelStreaming(channel, data);
+			}
+		})
 	});
 }
 
-function checkTwitchChannelExists(user){
-	$.getJSON(apiBaseURL + 'channels/' + user + '?callback=?', function(data) {
-		console.log(data); 
-		if(data.status === 404){
-			//make a function to make the display. maybe need to make an array of arrays with the status to then sort the list.
-			doesNotExistArr.push(user);
-		}
-		else{
-			checkTwitchChannelStreaming(user);
-		}
-	})
-}
-
-function checkTwitchChannelStreaming(user){
+function checkTwitchChannelStreaming(user, channelData){
 	console.log(user);
 	$.getJSON(apiBaseURL + 'streams/' + user + '?callback=?', function(data){
 		console.log(data);
 		if(data.stream == null){
-			offlineArr.push(user);
+			makeOfflineDiv(user, data, channelData);
 		}
 		else{
-			onlineArr.push(user);
+			makeOnlineDiv(user, data);
 		}
 	})
 }
@@ -45,7 +42,12 @@ function make404Div(user, userData){
 	$('#doesNotExistHolder').append(searchResults);
 }
 
-function makeOnlineDiv(user, userdata){
-	var searchResults = "<div class='channel online' id='" + user + "'><img src =" userdata.class='fa fa-ban float-left fa-5x' aria-hidden='true'></i><h2>" + user + "</h2><p>" + userData.message + "</p></div>";
+function makeOnlineDiv(user, userData){
+	var searchResults = "<div class='channel online' id='" + user + "'><img src=" + userData.stream.channel.logo + " class='float-left channelLogo'><h2>" + user + "</h2><p><strong>" + userData.stream.game + "</strong> - " + userData.stream.channel.status + "</p></div>";
 	$('#onlineHolder').append(searchResults);
+}
+
+function makeOfflineDiv(user, userData, channelData){
+	var searchResults = "<div class='channel offline' id='" + user + "'><img src=" + channelData.logo + " class='float-left channelLogo'><h2>" + user + "</h2><p><strong>OFFLINE</strong></p></div>";
+	$('#offlineHolder').append(searchResults);
 }
