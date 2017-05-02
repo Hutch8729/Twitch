@@ -1,0 +1,30 @@
+.channel{
+	border:1px solid black;
+	border-radius: 5px;
+	padding: 5px 5px 5px 5px;
+}
+
+.no-channel{
+	background: red;
+}
+
+.offline{
+	background: lightgrey;
+}
+
+.online{
+	background: green;
+}
+
+p{
+	font-family: arial;
+}
+
+#channelsHolder{
+	padding: 10px 10px 10px 10px;
+}
+
+.float-left{
+  float: left
+  margin: 0 10px 10px 0
+}
